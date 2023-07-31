@@ -1,0 +1,318 @@
+
+	<!DOCTYPE html>
+	<html lang="en" >
+	<head>
+  	<meta charset="UTF-8">
+	<meta content="width=device-width, initial-scale=1" name="viewport"/>
+	<link rel="icon" type="image/png"   href="https://ugc.padletcdn.com/uploads/padlet-uploads/1716831704/c5b42c64faf6de770531964c00810d7a/Sembrador_de_la_palabra.jpg?token=ssERuIu64gSPdTdJZZDQXyl_sbylOwav09ILmWPBrjjXZ9CtltSo9M3E0mljxb6Mp2Rj85HXZulCJKDopUOyoA8mk1YhJl5Rwv-3PU_qSrO_dgxjLe-57SnaO1fxj6RDWf5b5yWVQSxZHdB5ZnlT8nRRRHnYIl9tbPfZcLi5BfSYsa8ywukg-m7pfw7dzCdV49CYZOwOu0CijPzItQJSTMoueFiH1d5mufnDx_ZUZMB5yNgByl3TRhzHDP7jVEX7CVu9CsZ9F93YH5WaHeeHNA==">
+  	<title>Sembrador de la palabra</title>
+ 	<style>
+	body{
+	background: url("https://ugc.padletcdn.com/uploads/padlet-uploads/1716831704/c5b42c64faf6de770531964c00810d7a/Sembrador_de_la_palabra.jpg?token=ssERuIu64gSPdTdJZZDQXyl_sbylOwav09ILmWPBrjjXZ9CtltSo9M3E0mljxb6Mp2Rj85HXZulCJKDopUOyoA8mk1YhJl5Rwv-3PU_qSrO_dgxjLe-57SnaO1fxj6RDWf5b5yWVQSxZHdB5ZnlT8nRRRHnYIl9tbPfZcLi5BfSYsa8ywukg-m7pfw7dzCdV49CYZOwOu0CijPzItQJSTMoueFiH1d5mufnDx_ZUZMB5yNgByl3TRhzHDP7jVEX7CVu9CsZ9F93YH5WaHeeHNA==");
+    	background-size: 100vw 100vh;
+    	background-repeat: no-repeat;;
+	}
+	/*---*/
+	audio::-webkit-media-controls-panel {
+  	background-color: #094293;
+	}
+	audio::-webkit-media-controls-play-button {
+  	background-color: #ffffff;
+  	border-radius: 50%;
+	}
+	audio::-webkit-media-controls-play-button:hover {
+  	background-color: #ffffff;
+	}
+	/* RESET RULES 
+	–––––––––––––––––––––––––––––––––––––––––––––––––– */
+	:root {
+  	--lightgray: #094293;
+  	--blue: #094293;
+  	--white: #fff;
+  	--black: rgba(0, 0, 0, 0.5); /* Black background with 0.5 opacity */;
+  	--bounceEasing: cubic-bezier(0.51, 0.92, 0.24, 1.15);
+	}
+	* {
+  	padding: 0;
+  	margin: 0;
+	}
+	a {
+  	color: inherit;
+  	text-decoration: none;
+	}
+	button {
+  	cursor: pointer;
+  	background: transparent;
+  	border: none;
+  	outline: none;
+  	font-size: inherit;
+	}
+	body {
+  	display: flex;
+  	align-items: center;
+  	justify-content: center;
+  	height: 100vh;
+  	font: 32px/1.5 sans-serif;
+	}
+	.btn-group {
+  	text-align: center;
+	}
+	.open-modal {
+  	font-weight: bold;
+  	background: var(--);
+  	color: var(--white);
+  	padding: 0.75rem 1.75rem;
+  	margin-bottom: 1rem;
+  	border-radius: 5px;
+	}
+	/* MODAL
+	–––––––––––––––––––––––––––––––––––––––––––––––––– */
+	.modal {
+  	position: fixed;
+  	top: 0;
+  	left: 0;
+  	right: 0;
+  	bottom: 0;
+  	display: flex;
+  	align-items: center;
+  	justify-content: center;
+  	padding: 1rem;
+  	background: var(--black);
+  	cursor: pointer;
+  	visibility: hidden;
+  	opacity: 0;
+  	transition: all 0.35s ease-in;
+	}
+	.modal.is-visible {
+  	visibility: visible;
+  	opacity: 1;
+	}
+	.modal-dialog {
+  	position: relative;
+  	max-width: 800px;
+  	max-height: 80vh;
+  	border-radius: 5px;
+  	background: var(--white);
+  	overflow: auto;
+  	cursor: default;
+	}
+	.modal-dialog > * {
+  	padding: 1rem;
+	}
+	.modal-header,
+	.modal-footer {
+  	background: var(--lightgray);
+	}
+	.modal-header {
+  	display: flex;
+  	align-items: center;
+  	justify-content: space-between;
+	}
+	.modal-header .close-modal {
+  	font-size: 1.5rem;
+	}
+	.modal p + p {
+  	margin-top: 1rem;
+	}
+	/* ANIMATIONS
+	–––––––––––––––––––––––––––––––––––––––––––––––––– */
+	[data-animation] .modal-dialog {
+  	opacity: 0;
+  	transition: all 0.5s var(--bounceEasing);
+	}
+	[data-animation].is-visible .modal-dialog {
+  	opacity: 1;
+  	transition-delay: 0.2s;
+	}
+	[data-animation="slideInOutDown"] .modal-dialog {
+  	transform: translateY(100%);
+	}
+	[data-animation="slideInOutTop"] .modal-dialog {
+  	transform: translateY(-100%);
+	}
+	[data-animation="slideInOutLeft"] .modal-dialog {
+  	transform: translateX(-100%);
+	}
+	[data-animation="slideInOutRight"] .modal-dialog {
+  	transform: translateX(100%);
+	}
+	[data-animation="zoomInOut"] .modal-dialog {
+  	transform: scale(0.2);
+	}
+	[data-animation="rotateInOutDown"] .modal-dialog {
+  	transform-origin: top left;
+  	transform: rotate(-1turn);
+	}
+	[data-animation="mixInAnimations"].is-visible .modal-dialog {
+  	-webkit-animation: mixInAnimations 2s 0.2s linear forwards;
+          	animation: mixInAnimations 2s 0.2s linear forwards;
+	}
+	[data-animation="slideInOutDown"].is-visible .modal-dialog,
+	[data-animation="slideInOutTop"].is-visible .modal-dialog,
+	[data-animation="slideInOutLeft"].is-visible .modal-dialog,
+	[data-animation="slideInOutRight"].is-visible .modal-dialog,
+	[data-animation="zoomInOut"].is-visible .modal-dialog,
+	[data-animation="rotateInOutDown"].is-visible .modal-dialog {
+  	transform: none;
+	}
+	@-webkit-keyframes mixInAnimations {
+  	0% {
+    	transform: translateX(-100%);
+  	}
+	10% {
+    	transform: translateX(0);
+  	}
+	20% {
+    	transform: rotate(20deg);
+  	}
+	30% {
+    	transform: rotate(-20deg);
+  	}
+	40% {
+    	transform: rotate(15deg);
+  	}
+	50% {
+    	transform: rotate(-15deg);
+  	}
+	60% {
+    	transform: rotate(10deg);
+  	}
+	70% {
+    	transform: rotate(-10deg);
+  	}
+	80% {
+    	transform: rotate(5deg);
+  	}
+	90% {
+    	transform: rotate(-5deg);
+  	}
+	100% {
+    	transform: rotate(0deg);
+  	}
+	}
+	@keyframes mixInAnimations {
+  	0% {
+    	transform: translateX(-100%);
+  	}
+	10% {
+    	transform: translateX(0);
+  	}
+	20% {
+    	transform: rotate(20deg);
+  	}
+	30% {
+    	transform: rotate(-20deg);
+  	}
+	40% {
+    	transform: rotate(15deg);
+  	}
+	50% {
+    	transform: rotate(-15deg);
+  	}
+	60% {
+    	transform: rotate(10deg);
+  	}
+	70% {
+    	transform: rotate(-10deg);
+  	}
+	80% {
+    	transform: rotate(5deg);
+  	}
+	90% {
+    	transform: rotate(-5deg);
+  	}
+	100% {
+    	transform: rotate(0deg);
+  	}
+	}
+	/* FOOTER
+	–––––––––––––––––––––––––––––––––––––––––––––––––– */
+	.page-footer {
+  	position: absolute;
+  	bottom: 1rem;
+  	right: 1rem;
+	}
+	.page-footer span {
+  	color: #094293;
+	}
+	</style>
+	</head>
+	<body>
+
+
+
+	<!-- partial:index.partial.html -->
+
+
+
+	<div class="btn-group">
+ 	<button type="button" class="open-modal" data-open="modal2">
+    	Palabra del Señor
+  	</button>
+	</div>
+
+
+	<div class="modal" id="modal2" data-animation="mixInAnimations">
+  	<div class="modal-dialog">
+    	<header class="modal-header">
+      	<font color="#ffffff"><b>EVANGELIO</b></font>
+      	<button class="close-modal" aria-label="close modal" data-close>
+        	<font color="#ffffff">✕</font>  
+      	</button>
+    	</header>
+    	<section class="modal-content">
+	 [Vende cuanto tiene y compra aquel campo.]
+	 <br>Del santo Evangelio según san Mateo 13, 44-52
+	 <br>En aquel tiempo, Jesús dijo a sus discípulos: "El Reino de los cielos se parece a un tesoro escondido en un campo. El que lo encuentra lo vuelve a esconder y, lleno de alegría, va y vende cuanto tiene y compra aquel campo.
+	 <br>El Reino de los cielos se parece también a un comerciante en perlas finas que, al encontrar una perla muy valiosa, va y vende cuanto tiene y la compra.
+	 <br>[También se parece el Reino de los cielos a la red que los pescadores echan en el mar y recoge toda clase de peces. Cuando se llena la red, los pescadores la sacan a la playa y se sientan a escoger los pescados; ponen los buenos en canastos y tiran los malos. Lo mismo sucederá al final de los tiempos: vendrán los ángeles, separarán a los malos de los buenos y los arrojarán al horno encendido. Allí será el llanto y la desesperación.
+	 <br>¿Han entendido todo esto?" Ellos le contestaron: "Sí". Entonces él les dijo: "Por eso, todo escriba instruido en las cosas del Reino de los cielos es semejante al padre de familia, que va sacando de su tesoro cosas nuevas y cosas antiguas".] Palabra del Señor.
+      	</section>
+    	<footer class="modal-footer">
+      	<center><font color="#ffffff">
+	<center>
+	<audio controls style="width: 95%">
+   	<source src="https://storage.googleapis.com/padlet-uploads/1716831704/c70de5de025842694435ab73a7f1664c/Sembrador_de_la_palabra.mp3?Expires=1691395017&GoogleAccessId=778043051564-q79bsd8mc40b0bl82ikkrtc3jdofe4dg%40developer.gserviceaccount.com&Signature=vqAtfSRDMndGAbmyRi2MSt4c%2FtGeiTG3jwDKEC9p36VXtFpa536Fjl%2B9%2Fj6dBhnr9bB%2FBdMn5Xs5DbT1h3Oy%2BROwySFXSmD4MdIk7KdNucqjBXWRH9mm9oS7GGRZgFupeAsPYXpvvg1YFS5ShGamfHM7WsHxuOh29A2n9WBkXNE%3D&original-url=https%3A%2F%2Fpadlet-uploads.storage.googleapis.com%2F1716831704%2Fc70de5de025842694435ab73a7f1664c%2FSembrador_de_la_palabra.mp3" type="audio/mpeg">
+	</audio>
+	</center>
+      	</font></center>
+    	</footer>
+  	</div>
+	</div>
+	
+	<!-- partial -->
+
+
+
+	<script>
+	const openEls = document.querySelectorAll("[data-open]");
+	const closeEls = document.querySelectorAll("[data-close]");
+	const isVisible = "is-visible";
+	for (const el of openEls) {
+  	el.addEventListener("click", function() {
+    	const modalId = this.dataset.open;
+    	document.getElementById(modalId).classList.add(isVisible);
+  	});
+	}
+	for (const el of closeEls) {
+  	el.addEventListener("click", function() {
+    	this.parentElement.parentElement.parentElement.classList.remove(isVisible);
+  	});
+	}
+	document.addEventListener("click", e => {
+  	if (e.target == document.querySelector(".modal.is-visible")) {
+    	document.querySelector(".modal.is-visible").classList.remove(isVisible);
+  	}
+	});
+	document.addEventListener("keyup", e => {
+  	// if we press the ESC
+  	if (e.key == "Escape" && document.querySelector(".modal.is-visible")) {
+    	document.querySelector(".modal.is-visible").classList.remove(isVisible);
+  	}
+	});
+  	</script>
+
+
+
+	</body>
+	</html>
